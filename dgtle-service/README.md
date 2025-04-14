@@ -37,4 +37,12 @@
         } as TypeOrmModuleOptions;
     })
     ```
-
+    - 因为nestjs打包只会将ts文件打包到dist下，所以yml文件需要在nest-cli.json中配置
+    ```javascript
+    {
+      "compilerOptions": {
+        "assets": ["config/*.yml"] // 配置yml文件
+      }
+    }
+    ```
+    - 数据库相关的库: `mysql2`、`@nestjs/typeorm`
