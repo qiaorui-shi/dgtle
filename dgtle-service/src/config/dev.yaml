@@ -1,0 +1,16 @@
+# 数据库配置
+db:
+  mysql:
+    host: '127.0.0.1'
+    username: 'root'
+    password: '123456'
+    database: 'dgtle_db'
+    port: 3306
+    charset: 'utf8mb4'
+    logger: 'file'
+    logging: true
+    multipleStatements: true
+    dropSchema: false
+    synchronize: false
+    supportBigNumbers: true
+    bigNumberStrings: true
