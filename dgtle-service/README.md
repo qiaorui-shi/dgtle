@@ -2,7 +2,6 @@
   ```javascript
   nest new dgtle-service
   ```
-
 ## 环境变量配置（mysql、redis）
 ### mysql
 1. 创建`/config/dev.yml` *(也可以通过env环境变量配置)*
@@ -52,6 +51,33 @@
   和mysql类似
   需要用到的相关的库: `redis`、`@nestjs-modules/ioredis`
 
+## 静态资源目录
+  1. 通过app.useStaticAssets()
+  ```javascript
+  // 静态文件目录 使用useStaticAssets方法必须在create时指定类型为NestExpressApplication （本质还是nest中对expree进行了封装）
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useStaticAssets(join(__dirname, '..', 'public'), {
+    prefix: '', // 访问路径前缀
+  }),
+  ```
+  2. 直接引入express
+  ```javascript
+  import * as express from 'express'; // 引入express
+  app.use('/static', express.static(join(__dirname, '..', 'static')));
+  ```
+
+## 通过管道进行接口校验
+  1. 安装依赖包: `npm i class-validator class-transformer`
+  2. 创建`src/common/pipes/validate.pipe.ts`文件，用于校验接口参数,并返回第一个错误（class-validate会返回所有错误）
+  3. 全局使用校验管道: `app.useGlobalPipes(new ValidationPipe());`
+
+## 全局异常过滤器/统一异常返回格式
+  1. 创建`src/common/filters/http-exception.filter.ts`文件，用于全局异常捕获
+  2. 自定义异常类 `HttpExceptionFilter` 实现 `ExceptionFilter` 中的catch方法
+  3. 通过`ArgumentsHost`获取response和request, 通过exception获取错误信息
+  4. 统一处理异常返回格式并返回
+
+## 
 
 ## nsetjs使用过程中的疑问
 1. 什么情况下需要使用controller、service、module?
