@@ -9,18 +9,21 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "cross-env NODE_ENV=dev nest start --watch",
-    "start:prod": "cross-env NODE_ENV=prod nest start --watch",
+    "dev": "cross-env NODE_ENV=dev nest start --watch",
+    "prod": "cross-env NODE_ENV=prod nest start --watch",
     "build:dev": "cross-env NODE_ENV=prod nest build",
     "build:pro": "cross-env NODE_ENV=prod nest build"
   },
   "dependencies": {
+    "@nestjs-modules/ioredis": "^2.0.2",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/typeorm": "^11.0.0",
     "mysql2": "^3.14.0",
+    "redis": "^4.7.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },

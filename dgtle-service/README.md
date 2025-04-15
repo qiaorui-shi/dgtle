@@ -4,6 +4,7 @@
   ```
 
 ## 环境变量配置（mysql、redis）
+### mysql
 1. 创建`/config/dev.yml` *(也可以通过env环境变量配置)*
 2. 安装`@nestjs/config`包，用于管理环境变量、加载配置文件
 
@@ -46,3 +47,16 @@
   }
   ```
   - 数据库相关的库: `mysql2`、`@nestjs/typeorm`
+
+### redis
+  和mysql类似
+  需要用到的相关的库: `redis`、`@nestjs-modules/ioredis`
+
+
+## nsetjs使用过程中的疑问
+1. 什么情况下需要使用controller、service、module?
+   - 需要提供http等接口时候，也就是业务模块，需要用到controller、service、module。
+   - 不需要提供http等接口时，像mysql连接，则只需要module即可。其它类似的像utils,common等一般也就只需要module。
+   - 像redis连接，需要module，但是service根据实际情况而定，如果需要封装一些方法，则可以使用service。
+  
+  总结：一个模块如果涉及接口则使用controller；service是否需要根据是否有需要封装的逻辑来决定。

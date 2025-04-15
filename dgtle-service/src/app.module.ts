@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import dbconfig from './config/index';
-import { DatabaseModule } from './db/db.module';
+import { DatabaseModule } from './db/mysql/db.module';
+import { RedisModule } from './db/redis/redis.module';
+import { UserModule } from './module/user/user.module';
+import { DynamicModule } from './module/dynamic/dynamic.module';
 
 @Module({
   imports: [
@@ -11,6 +14,9 @@ import { DatabaseModule } from './db/db.module';
       cache: true,
     }),
     DatabaseModule,
+    RedisModule,
+    UserModule,
+    DynamicModule
   ],
   controllers: [],
   providers: [],

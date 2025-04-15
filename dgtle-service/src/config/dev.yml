@@ -4,7 +4,7 @@ db:
     host: '127.0.0.1'
     username: 'root'
     password: '123456'
-    database: 'dgtle'
+    database: 'dgtle_db'
     port: 3306
     charset: 'utf8mb4'
     logger: 'file'
@@ -14,3 +14,13 @@ db:
     synchronize: false
     supportBigNumbers: true
     bigNumberStrings: true
+
+# redis配置 keyPrefix 当存在多个服务连接同一个redis实例时使用
+redis:
+  type: 'single'
+  options:
+    host: '127.0.0.1'
+    port: 6379
+    password: ''
+    db: 0
+    keyPrefix: ''
