@@ -16,7 +16,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   // 全局异常过滤器，统一处理异常
   app.useGlobalFilters(new HttpExceptionFilter());
+  // 设置接口前缀
+  app.setGlobalPrefix('api');
 
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+bootstrap(); 
