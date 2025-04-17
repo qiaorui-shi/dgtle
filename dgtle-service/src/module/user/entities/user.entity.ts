@@ -9,7 +9,7 @@ export class UserEntity {
   account: string
 
   @Column({ type: 'varchar', length: 128, comment: '用户密码' })
-  password: string
+  password: string 
 
   @Column({
     type: 'varchar',
@@ -21,4 +21,7 @@ export class UserEntity {
 
   @Column({ type: 'tinyint', comment: '用户账号等级' })
   level: number
+
+  @Column({ type: 'int', comment: '用户账号等级经验' })
+  level_exp: number
 }
