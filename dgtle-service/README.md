@@ -77,9 +77,13 @@
   3. 通过`ArgumentsHost`获取response和request, 通过exception获取错误信息
   4. 统一处理异常返回格式并返回
 
-## 
+# 实现用户注册&登录
+  1. 安装依赖包: `npm i bcryptjs`
+  2. 注册接口：通过bcrypt.genSaltSync生成（特定字符串）盐，通过bcrypt.hashSync生成哈希值对密码加密，将信息存入数据库
+  3. 登录接口：通过bcrypt.compareSync比较密码是否一致，判断是否登录成功
+  4. 登录成功生成uuid，将uuid+userId生成session，将session作为key,用户信息作为value存入redis，并将session存入cookie，返回token
 
-## nsetjs使用过程中的疑问
+# nsetjs使用过程中的疑问
 1. 什么情况下需要使用controller、service、module?
    - 需要提供http等接口时候，也就是业务模块，需要用到controller、service、module。
    - 不需要提供http等接口时，像mysql连接，则只需要module即可。其它类似的像utils,common等一般也就只需要module。
