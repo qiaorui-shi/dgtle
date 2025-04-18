@@ -1,0 +1,74 @@
+.mine-page {
+  width: 100vw;
+  padding: 0 10px;
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    .user-avatar {
+      width: 56px;
+      height: 56px;
+    }
+    .user-name {
+      flex: 1;
+      padding: 5px 10px;
+      .name {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .text {
+        font-size: 12px;
+        color: #bcbcbc;
+      }
+    }
+    .more-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 22px;
+      width: 22px;
+      padding: 5px;
+      border-radius: 50%;
+      background-color: #e2e2e2;
+      color: #435771;
+      font-size: 22px;
+    }
+  }
+
+  .data-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: #fff;
+    .data-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .text {
+        font-size: 12px;
+        color: #bcbcbc;
+      }
+      .count {
+        font-size: 18px;
+      }
+    }
+    .line {
+      height: 38px;
+      border-left: 1px solid #bcbcbc;
+    }
+  }
+
+  .menu {
+    margin-top: 20px;
+    .entry-menu {
+    }
+
+    .sys-menu {
+      margin-top: 10px;
+    }
+  }
+}
