@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { GenerateUUID } from 'src/common/utils/index';
 import { ResultData } from 'src/common/utils/result';
+import { RedisService } from 'src/db/redis/redis.service'; // 引入redis服务，用于存储token
 // 引入实体
 import { UserEntity } from './entities/user.entity';
 import { CreateUserDto, LoginUserDto, UpdateUserDto } from './dto/index.dto';
@@ -16,6 +17,7 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepo: Repository<UserEntity>,
     private readonly jwtService: JwtService,
+    private readonly redisService: RedisService,
   ) {}
   async registry(createUserDto: CreateUserDto) {
     // 检查当前账号是否已经存在
@@ -31,9 +33,8 @@ export class UserService {
       const pwdEncryptedStr = bcrypt.hashSync(createUserDto.password, salt);
       createUserDto.password = pwdEncryptedStr;
     }
-
     // 保存用户信息到数据库
-    const res = await this.userRepo.save({ ...createUserDto, level: 1 });
+    const res = await this.userRepo.save({ ...createUserDto, level: 1, level_exp: 0 });
     if (res) {
       return ResultData.success(200, '注册成功');
     }
@@ -48,10 +49,11 @@ export class UserService {
     // 1.获取用户信息、生成uuid
     // 2.根据用户id和uuid生成token
     // 3.存入redis
+    // 4.其它请求携带token，中间件或者守卫中验证token
     const uuid = GenerateUUID();
     const token = this.jwtService.sign({ uuid, userId: user.id });
-
-    return ResultData.success(200, '登录成功');
+    this.redisService.set(`${uuid}${user.id}`, JSON.stringify(user), 60 * 60 * 3);
+    return ResultData.success(200, '登录成功', { token });
   }
 
   findAll() {

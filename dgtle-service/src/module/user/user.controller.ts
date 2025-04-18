@@ -25,7 +25,7 @@ export class UserController {
    * @param {LoginUserDto} loginUserDto 登录用户
    * @returns {Promise<ResultData>} 登录结果
    * */
-  @Post()
+  @Post('/login')
   login(@Body() loginUserDto: LoginUserDto) {
     return this.userService.login(loginUserDto);
   }
