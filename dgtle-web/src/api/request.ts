@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 // 创建axios实例
 const instance = axios.create({
-  baseURL: '', // 从环境变量获取基础URL
+  baseURL: '/api', // 从环境变量获取基础URL
   timeout: 10000, // 请求超时时间
   headers: {
     'Content-Type': 'application/json'
@@ -41,7 +41,6 @@ instance.interceptors.response.use(
     return Promise.resolve(res.data)
   },
   error => {
-    // 对响应错误做些什么
     return Promise.reject(error)
   }
 )
