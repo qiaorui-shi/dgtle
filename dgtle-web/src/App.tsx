@@ -1,12 +1,14 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './router/index';
+import React from "react";
+// import { BrowserRouter, Router  } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import AppRoutes from "./router/index";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <AppRoutes />
+    // </BrowserRouter>
+    RouterProvider({ router: AppRoutes })
   );
 };
 

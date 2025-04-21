@@ -28,41 +28,41 @@ const Footer: React.FC = () => {
     <div className='footer'>
       <ul className='nav'>
         <li
-          onClick={() => handleNavigate('/home')}
-          className={isActive('/home') ? 'active' : ''}
+          onClick={() => handleNavigate('/Home')}
+          className={isActive('/Home') ? 'active' : ''}
         >
           <div className='icon'>
-            {isActive('/home') ? <WapHome /> : <WapHomeO />}
+            {isActive('/Home') ? <WapHome /> : <WapHomeO />}
           </div>
           <span>首页</span>
         </li>
         <li
-          onClick={() => handleNavigate('/interest')}
-          className={isActive('/interest') ? 'active' : ''}
+          onClick={() => handleNavigate('/Interest')}
+          className={isActive('/Interest') ? 'active' : ''}
         >
           <div className='icon'>
-            {isActive('/interest') ? <Star /> : <StarO />}
+            {isActive('/Interest') ? <Star /> : <StarO />}
           </div>
           <span>兴趣</span>
         </li>
-        <li onClick={() => handleNavigate('/home')} className='add'>
+        <li onClick={() => handleNavigate('/PublishDynamic')} className='add'>
           <Add />
         </li>
         <li
-          onClick={() => handleNavigate('/message')}
-          className={isActive('/message') ? 'active' : ''}
+          onClick={() => handleNavigate('/Message')}
+          className={isActive('/Message') ? 'active' : ''}
         >
           <div className='icon'>
-            {isActive('/message') ? <SmileComment /> : <SmileCommentO />}
+            {isActive('/Message') ? <SmileComment /> : <SmileCommentO />}
           </div>
           <span>消息</span>
         </li>
         <li
-          onClick={() => handleNavigate('/mine')}
-          className={isActive('/mine') ? 'active' : ''}
+          onClick={() => handleNavigate('/Mine')}
+          className={isActive('/Mine') ? 'active' : ''}
         >
           <div className='icon'>
-            {isActive('/mine') ? <Smile /> : <SmileO />}
+            {isActive('/Mine') ? <Smile /> : <SmileO />}
           </div>
           <span>我的</span>
         </li>
