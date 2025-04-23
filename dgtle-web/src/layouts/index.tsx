@@ -15,7 +15,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className="layout">
-      <div className="content">
+      <div className="page">
         <Outlet />
       </div>
       {isFooter && <Footer />}

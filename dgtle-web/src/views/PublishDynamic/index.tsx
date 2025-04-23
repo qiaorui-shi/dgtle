@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { Cell, Input } from "react-vant";
 import { Cross } from "@react-vant/icons";
 import { loadImg } from "@/utils";
 
 const PublishDynamic: React.FC = () => {
-  const [imgList, setImgList] = useState([
-    "/assets/img/2.png",
-    "/assets/img/3.png",
-    "/assets/img/4.png",
-    "/assets/img/2.png",
-    "/assets/img/3.png",
-    "/assets/img/4.png",
-    "/assets/img/2.png",
-    "/assets/img/3.png",
-    "/assets/img/4.png"
+  const [imgList, setImgList] = useState<string[]>([
+    "/assets/img1/2.png",
+    "/assets/img1/3.png",
+    "/assets/img1/4.png",
+    "/assets/img1/2.png",
+    "/assets/img1/3.png",
+    "/assets/img1/4.png",
+    "/assets/img1/2.png",
+    "/assets/img1/3.png",
+    "/assets/img1/4.png"
   ]);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const Header: React.FC = () => {
     return (
@@ -39,8 +40,8 @@ const PublishDynamic: React.FC = () => {
           </Cell>
         </div>
         <div className="content-img">
-          {imgList.length === 0 && <div className="add"></div>}
-          <div className="show-box">
+          {imgList && imgList.length === 0 && <div className="add"></div>}
+          <div className="show-box" ref={containerRef}>
             {imgList.map((item, index) => {
               return (
                 <div className="img-item" key={index}>
