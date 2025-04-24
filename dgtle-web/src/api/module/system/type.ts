@@ -1,10 +1,9 @@
 export interface RegistryDataType {
-  username: string
-  password: string
-  phone: string
+  phone: string;
+  password: string;
 }
 
 export interface LoginDataType {
-  username: string
-  password: string
+  account: string;
+  password: string;
 }

@@ -5,17 +5,7 @@ import { Cross } from "@react-vant/icons";
 import { loadImg } from "@/utils";
 
 const PublishDynamic: React.FC = () => {
-  const [imgList, setImgList] = useState<string[]>([
-    "/assets/img1/2.png",
-    "/assets/img1/3.png",
-    "/assets/img1/4.png",
-    "/assets/img1/2.png",
-    "/assets/img1/3.png",
-    "/assets/img1/4.png",
-    "/assets/img1/2.png",
-    "/assets/img1/3.png",
-    "/assets/img1/4.png"
-  ]);
+  const [imgList, setImgList] = useState<string[]>([]);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const Header: React.FC = () => {
