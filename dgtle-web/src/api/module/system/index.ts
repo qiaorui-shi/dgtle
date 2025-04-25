@@ -1,7 +1,7 @@
 import { request } from '../../request'
-import type { LoginDataType, RegistryDataType } from './type'
+import type { LoginDataType, RegisterDataType } from './type'
 
-export function registry (data: RegistryDataType) {
+export function register (data: RegisterDataType) {
   return request<void>({
     url: '/user/registry',
     method: 'post',

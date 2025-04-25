@@ -31,7 +31,7 @@ const Login: React.FC = () => {
         <h1>账号登录</h1>
       </div>
       <div className="login-account">
-        <Input value={form.account} type="tel" onChange={(account: string) => changeForm("account", account)} placeholder="输入账号" />
+        <Input value={form.account} type="number" onChange={(account: string) => changeForm("account", account)} placeholder="输入账号" />
       </div>
       <div className="login-password">
         <Input value={form.password} type="password" onChange={(password: string) => changeForm("password", password)} placeholder="输入密码" />
