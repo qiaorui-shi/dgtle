@@ -1,9 +1,9 @@
 // import React from "react";
 // import { Routes, Route } from "react-router-dom";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, RouteObject, redirect } from "react-router-dom";
 import { lazy } from "react";
 const Login = lazy(() => import("../views/system/login/index"));
-const NotFound = lazy(() => import("../views/system/404/index")); // 404 页面组件，按需引入，减少首屏加载时间，优化用户体验。 也可以使用 react-err
+const NotFound = lazy(() => import("../views/system/404/index"));
 
 const Layout = lazy(() => import("../layouts/index"));
 const Home = lazy(() => import("../views/home/index"));
@@ -11,6 +11,15 @@ const Interest = lazy(() => import("../views/interest/index"));
 const Message = lazy(() => import("../views/message/index"));
 const Mine = lazy(() => import("../views/mine/index"));
 const PublishDynamic = lazy(() => import("../views/PublishDynamic/index"));
+
+const checkAuth = () => {
+  // 校验token是否存在
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return redirect("/login");
+  }
+  return null;
+};
 
 const routes: RouteObject[] = [
   {
@@ -20,6 +29,7 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <Layout />,
+    loader: checkAuth,
     children: [
       {
         path: "/Home",
