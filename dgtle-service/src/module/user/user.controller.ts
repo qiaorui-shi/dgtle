@@ -16,7 +16,7 @@ export class UserController {
    * @param {CreateUserDto} createUserDto 注册用户
    * @returns {Promise<ResultData>} 注册结果
    * */
-  @Post('')
+  @Post('/registry')
   registry(@Body() createUserDto: CreateUserDto) {
     return this.userService.registry(createUserDto);
   }
