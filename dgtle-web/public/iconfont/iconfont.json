@@ -1,0 +1,128 @@
+{
+  "id": "4907019",
+  "name": "dgtle-web",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5466093",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e734",
+      "unicode_decimal": 59188
+    },
+    {
+      "icon_id": "3308563",
+      "name": "你的兴趣",
+      "font_class": "xingqu1",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "955932",
+      "name": "用户反馈",
+      "font_class": "yonghufankui",
+      "unicode": "e6e4",
+      "unicode_decimal": 59108
+    },
+    {
+      "icon_id": "415258",
+      "name": "setting",
+      "font_class": "setting",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "605573",
+      "name": "众测",
+      "font_class": "zhongce",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "3396601",
+      "name": "消息",
+      "font_class": "xiaoxi1",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "4784078",
+      "name": "草稿箱",
+      "font_class": "caogaoxiang",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "6891742",
+      "name": "闲置",
+      "font_class": "xianzhi",
+      "unicode": "e722",
+      "unicode_decimal": 59170
+    },
+    {
+      "icon_id": "7450603",
+      "name": "活动",
+      "font_class": "huodong",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "8553333",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
+    },
+    {
+      "icon_id": "10915774",
+      "name": "兴趣",
+      "font_class": "xingqu",
+      "unicode": "ef0b",
+      "unicode_decimal": 61195
+    },
+    {
+      "icon_id": "11372716",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e8bb",
+      "unicode_decimal": 59579
+    },
+    {
+      "icon_id": "11372773",
+      "name": "我的",
+      "font_class": "wode1",
+      "unicode": "e8c6",
+      "unicode_decimal": 59590
+    },
+    {
+      "icon_id": "15458710",
+      "name": "首页",
+      "font_class": "shouye1",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "16655255",
+      "name": "open eyes",
+      "font_class": "eyes",
+      "unicode": "e810",
+      "unicode_decimal": 59408
+    },
+    {
+      "icon_id": "26580598",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "39211645",
+      "name": "首页 - 点评",
+      "font_class": "a-Group4",
+      "unicode": "e6a8",
+      "unicode_decimal": 59048
+    }
+  ]
+}
