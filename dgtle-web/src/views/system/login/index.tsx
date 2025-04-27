@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "react-vant";
+import { Input } from "antd-mobile";
 import "./index.scss";
 import { login } from "@/api/module/system";
 import type { LoginDataType } from "@/api/module/system/type.ts";

@@ -8,6 +8,8 @@
     .user-avatar {
       width: 56px;
       height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
     }
     .user-name {
       flex: 1;
@@ -64,7 +66,12 @@
 
   .menu {
     margin-top: 20px;
-    .entry-menu {
+    .entry-menu,
+    .sys-menu {
+      font-size: 16px;
+      .adm-list-item-content-main{
+        font-size: 15px;
+      }
     }
 
     .sys-menu {
