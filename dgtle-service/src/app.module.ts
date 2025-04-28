@@ -4,6 +4,8 @@ import dbconfig from './config/index';
 import { DatabaseModule } from './db/mysql/db.module';
 import { RedisModule } from './db/redis/redis.module';
 import { JwtAuthGuard } from './common/guards/jwt.guard';
+
+import { MainModule } from './module/main/main.module';
 import { UserModule } from './module/user/user.module';
 import { DynamicModule } from './module/dynamic/dynamic.module';
 
@@ -16,6 +18,9 @@ import { DynamicModule } from './module/dynamic/dynamic.module';
     }),
     DatabaseModule,
     RedisModule,
+
+    // system
+    MainModule,
     UserModule,
     DynamicModule,
   ],

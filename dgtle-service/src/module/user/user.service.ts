@@ -9,7 +9,8 @@ import { ResultData } from 'src/common/utils/result';
 import { RedisService } from 'src/db/redis/redis.service'; // 引入redis服务，用于存储token
 // 引入实体
 import { UserEntity } from './entities/user.entity';
-import { CreateUserDto, LoginUserDto, UpdateUserDto } from './dto/index.dto';
+import { RegistryUserDto, LoginUserDto } from '../main/dto/index';
+import { UpdateUserDto } from './dto/index.dto';
 
 @Injectable()
 export class UserService {
@@ -37,7 +38,7 @@ export class UserService {
     return this.jwtService.verify(token.replace('Bearer ', ''));
   }
 
-  async registry(createUserDto: CreateUserDto) {
+  async registry(createUserDto: RegistryUserDto) {
     // 检查当前账号是否已经存在
     const user = await this.userRepo.findOne({ where: { account: createUserDto.account } });
     if (user) {

@@ -90,9 +90,7 @@
   2. 使用方式
      - 通过app.useGlobalGuards(new xxxGuard())方法注入,因为是手动new的，一般guard中依赖其它服务，nest不知道怎么给它注入依赖（不推荐）
      - 在app.module.ts中通过providers注入（推荐）
-
-
-
+     - 
 ## nsetjs使用过程中的疑问
 1. 什么情况下需要使用controller、service、module?
    - 需要提供http等接口时候，也就是业务模块，需要用到controller、service、module。
@@ -102,4 +100,4 @@
   总结：一个模块如果涉及接口则使用controller；service是否需要根据是否有需要封装的逻辑来决定。
 
 ## 其它
-  1. path-to-regexp库，将地址转换为正则表达式，一般用于路由匹配
+  1. path-to-regexp库，将地址转换为正则表达式，示例：路由白名单转换成正则再对当前请求的路由进行正则校验
