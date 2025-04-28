@@ -31,12 +31,12 @@ jwt:
   expiresin: '1h'
   refreshExpiresIn: '2h'
 
-
 # 接口白名单
 perm:
   router:
     whiteList:
-      [ 
+      [
+        { path: '/api/captcha', method: 'GET' },
         { path: '/api/user/login', method: 'POST' },
         { path: '/api/user/register', method: 'POST' },
       ]

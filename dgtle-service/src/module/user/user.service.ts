@@ -4,7 +4,8 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 
-import { GenerateUUID } from 'src/common/utils/index';
+import { generateUUID } from 'src/common/utils/index';
+import { CacheEnum } from '../../common/enums/cacheEnum';
 import { ResultData } from 'src/common/utils/result';
 import { RedisService } from 'src/db/redis/redis.service'; // 引入redis服务，用于存储token
 // 引入实体
@@ -66,10 +67,10 @@ export class UserService {
       return ResultData.fail(500, '密码错误');
 
     // 生成uuid
-    const uuid = GenerateUUID();
+    const uuid = generateUUID();
     // 根据uuid和用户id生成token
     const token = this.createToken({ uuid, userId: user.id });
-    this.redisService.set(`${uuid}${user.id}`, JSON.stringify(user), 60 * 60 * 3);
+    this.redisService.set(`${CacheEnum.LOGIN_TOKEN_KEY}${uuid}`, JSON.stringify(user), 60 * 60 * 3);
     return ResultData.success(200, '登录成功', { token });
   }
 

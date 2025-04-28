@@ -3,6 +3,7 @@ export interface RegisterDataType {
   phone: string;
   password: string;
   confirmPassword: string;
+  code?: number; // 验证码
 }
 
 export interface LoginDataType {
