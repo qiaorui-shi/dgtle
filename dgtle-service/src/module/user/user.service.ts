@@ -19,6 +19,24 @@ export class UserService {
     private readonly jwtService: JwtService,
     private readonly redisService: RedisService,
   ) {}
+
+  /**
+   * @description: 生成token
+   * @param payload { uuid: string; userId: string }
+   * */
+  createToken(payload: { uuid: string; userId: string }) {
+    return this.jwtService.sign(payload);
+  }
+
+  /**
+   * @description: 验证token
+   * @param token string
+   * */
+  verifyToken(token: string) {
+    if (!token) return null;
+    return this.jwtService.verify(token.replace('Bearer ', ''));
+  }
+
   async registry(createUserDto: CreateUserDto) {
     // 检查当前账号是否已经存在
     const user = await this.userRepo.findOne({ where: { account: createUserDto.account } });
@@ -46,12 +64,10 @@ export class UserService {
     if (!bcrypt.compareSync(loginUserDto.password, user.password))
       return ResultData.fail(500, '密码错误');
 
-    // 1.获取用户信息、生成uuid
-    // 2.根据用户id和uuid生成token
-    // 3.存入redis
-    // 4.其它请求携带token，中间件或者守卫中验证token
+    // 生成uuid
     const uuid = GenerateUUID();
-    const token = this.jwtService.sign({ uuid, userId: user.id });
+    // 根据uuid和用户id生成token
+    const token = this.createToken({ uuid, userId: user.id });
     this.redisService.set(`${uuid}${user.id}`, JSON.stringify(user), 60 * 60 * 3);
     return ResultData.success(200, '登录成功', { token });
   }

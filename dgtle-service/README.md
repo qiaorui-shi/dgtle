@@ -77,16 +77,29 @@
   3. 通过`ArgumentsHost`获取response和request, 通过exception获取错误信息
   4. 统一处理异常返回格式并返回
 
-# 实现用户注册&登录
+## 实现用户注册&登录
   1. 安装依赖包: `npm i bcryptjs`
-  2. 注册接口：通过bcrypt.genSaltSync生成（特定字符串）盐，通过bcrypt.hashSync生成哈希值对密码加密，将信息存入数据库
-  3. 登录接口：通过bcrypt.compareSync比较密码是否一致，判断是否登录成功
-  4. 登录成功生成uuid，将uuid+userId生成session，将session作为key,用户信息作为value存入redis，并将session存入cookie，返回token
+  2. 注册接口：通过`bcrypt.genSaltSync`生成（特定字符串）盐，通过bcrypt.hashSync生成哈希值对密码加密，将信息存入数据库
+  3. 登录接口：通过`bcrypt.compareSync`比较密码是否一致，判断是否登录成功
+  4. 登录成功生成`uuid`，将`uuid+userId`生成session，将session作为key,用户信息作为value存入redis，并将session存入cookie，返回token
 
-# nsetjs使用过程中的疑问
+## 实现守卫Guard
+  1. 实现
+     - 通过继承@nestjs/passport的AuthGuard('jwt')实现jwt认证（@nestjs/passport通过策略模式已经帮我们处理好了很多东西）
+     - 直接xxxGuard implements CanActivate,实现nestjs提供的CanActivate方法,自定义守卫逻辑
+  2. 使用方式
+     - 通过app.useGlobalGuards(new xxxGuard())方法注入,因为是手动new的，一般guard中依赖其它服务，nest不知道怎么给它注入依赖（不推荐）
+     - 在app.module.ts中通过providers注入（推荐）
+
+
+
+## nsetjs使用过程中的疑问
 1. 什么情况下需要使用controller、service、module?
    - 需要提供http等接口时候，也就是业务模块，需要用到controller、service、module。
    - 不需要提供http等接口时，像mysql连接，则只需要module即可。其它类似的像utils,common等一般也就只需要module。
    - 像redis连接，需要module，但是service根据实际情况而定，如果需要封装一些方法，则可以使用service。
   
   总结：一个模块如果涉及接口则使用controller；service是否需要根据是否有需要封装的逻辑来决定。
+
+## 其它
+  1. path-to-regexp库，将地址转换为正则表达式，一般用于路由匹配
