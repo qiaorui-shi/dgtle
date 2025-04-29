@@ -17,7 +17,7 @@ export function register(data: RegisterDataType) {
 }
 
 export function login(data: LoginDataType) {
-  return request<{ token: string }>({
+  return request<{ token: string; userInfo: unknown }>({
     url: "/login",
     method: "post",
     data

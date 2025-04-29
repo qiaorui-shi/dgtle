@@ -18,12 +18,13 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     const { phone, password } = form;
-    const { token = "" } = await login({ phone, password });
+    const { token = "", userInfo = {} } = await login({ phone, password });
     if (token) {
       localStorage.setItem("token", token);
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       navigate("/home");
     }
-  }; // 登录逻辑，调用接口，获取dat
+  };
 
   return (
     <div className="page-login">

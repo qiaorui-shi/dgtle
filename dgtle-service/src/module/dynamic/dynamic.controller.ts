@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DynamicService } from './dynamic.service';
-import { CreateDynamicDto } from './dto/create-dynamic.dto';
-import { UpdateDynamicDto } from './dto/update-dynamic.dto';
+import { CreateDynamicDto } from './dto/index';
 
 @Controller('dynamic')
 export class DynamicController {
@@ -23,9 +22,7 @@ export class DynamicController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDynamicDto: UpdateDynamicDto) {
-    return this.dynamicService.update(+id, updateDynamicDto);
-  }
+  update(@Param('id') id: string) {}
 
   @Delete(':id')
   remove(@Param('id') id: string) {

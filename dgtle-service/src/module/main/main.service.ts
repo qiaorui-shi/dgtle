@@ -85,7 +85,14 @@ export class MainService {
         JSON.stringify(user),
         60 * 60 * 3,
       );
-      return ResultData.success(200, '登录成功', { token });
+      const userInfo = {
+        id: user.id,
+        phone: user.phone,
+        username: user.username,
+        level: user.level,
+        level_exp: user.level_exp,
+      };
+      return ResultData.success(200, '登录成功', { userInfo, token });
     } else {
       return ResultData.fail(500, '账号不存在');
     }
