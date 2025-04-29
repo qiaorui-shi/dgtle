@@ -1,6 +1,6 @@
 ## 技术栈：
   - React + Antd-mobile + Axios + React-router-dom
-  - nestjs + typeOrm + redis + mysql
+  - nestjs + typeorm + redis + mysql
 
 ## 一个分享数字产品的h5应用
 
