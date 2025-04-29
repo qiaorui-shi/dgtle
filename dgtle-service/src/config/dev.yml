@@ -37,6 +37,6 @@ perm:
     whiteList:
       [
         { path: '/api/captcha', method: 'GET' },
-        { path: '/api/user/login', method: 'POST' },
-        { path: '/api/user/register', method: 'POST' },
+        { path: '/api/login', method: 'POST' },
+        { path: '/api/registry', method: 'POST' },
       ]

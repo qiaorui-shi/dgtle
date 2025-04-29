@@ -13,14 +13,14 @@ export class MainController {
   getCaptchaImage() {
     return this.mainService.getCaptchaImage();
   }
-  
+
   /**
-   * @param {RegistryUserDto} createUserDto 注册用户
+   * @param {RegistryUserDto} 注册用户
    * @returns {Promise<ResultData>} 注册结果
    * */
   @Post('/registry')
-  registry(@Body() createUserDto: RegistryUserDto) {
-    return this.mainService.registry(createUserDto);
+  registry(@Body() registryUserDto: RegistryUserDto) {
+    return this.mainService.registry(registryUserDto);
   }
 
   /**

@@ -9,11 +9,12 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const [codeUrl, setCodeUrl] = useState<string>("");
   const [form, updateForm] = useState<RegisterDataType>({
-    account: "16677778888",
-    password: "1234561",
+    username: "16677778888",
+    password: "123456",
     confirmPassword: "123456",
     phone: "16677778888",
-    code: undefined
+    code: undefined,
+    uuid: undefined
   });
 
   const changeForm = (filed: string, value: unknown) => {
@@ -22,7 +23,8 @@ const Login: React.FC = () => {
 
   const getCode = async () => {
     const { uuid, img } = await getCaptcha();
-    setCodeUrl("data:image/gif;base64," + img);
+    setCodeUrl(`data:image/svg+xml;charset=utf-8,${encodeURIComponent(img)}`);
+    changeForm("uuid", uuid);
   };
 
   const handleRegister = async () => {
@@ -31,7 +33,10 @@ const Login: React.FC = () => {
       return;
     }
     await register({ ...form });
-    navigate("/login");
+    Toast.show("注册成功");
+    setTimeout(() => {
+      navigate("/login");
+    }, 500); // 1s 后跳转到登录页面
   };
 
   useEffect(() => {
@@ -43,11 +48,11 @@ const Login: React.FC = () => {
       <div className="title">
         <h1>注册账号</h1>
       </div>
+      <div className="register-username">
+        <Input value={form.username} onChange={(username: string) => changeForm("username", username)} placeholder="输入用户名" />
+      </div>
       <div className="register-phone">
         <Input value={form.phone} type="tel" onChange={(phone: string) => changeForm("phone", phone)} placeholder="输入手机号" />
-      </div>
-      <div className="register-account">
-        <Input value={form.account} type="number" onChange={(account: string) => changeForm("account", account)} placeholder="输入账号" />
       </div>
       <div className="register-password">
         <Input value={form.password} type="password" onChange={(password: string) => changeForm("password", password)} placeholder="输入密码" />
@@ -56,9 +61,9 @@ const Login: React.FC = () => {
         <Input value={form.confirmPassword} type="password" onChange={(password: string) => changeForm("confirmPassword", password)} placeholder="确认密码" />
       </div>
       <div className="register-code">
-        <Input value={form.code} type="number" onChange={(code: number) => changeForm("code", code)} placeholder="验证码" />
+        <Input value={form.code} onChange={(code: string) => changeForm("code", code)} placeholder="验证码" />
         <div className="code-img">
-          <img src={codeUrl} alt="" />
+          <img src={codeUrl} onClick={getCode} />
         </div>
       </div>
       <div className="footer">

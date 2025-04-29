@@ -1,12 +1,13 @@
 export interface RegisterDataType {
-  account: string;
+  username: string;
   phone: string;
   password: string;
   confirmPassword: string;
-  code?: number; // 验证码
+  code?: string; // 验证码
+  uuid?: string; // 验证码uuid
 }
 
 export interface LoginDataType {
-  account: string;
+  phone: string;
   password: string;
 }

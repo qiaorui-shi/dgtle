@@ -10,7 +10,7 @@ export function getCaptcha() {
 
 export function register(data: RegisterDataType) {
   return request<void>({
-    url: "/user/registry",
+    url: "/registry",
     method: "post",
     data
   });
@@ -18,7 +18,7 @@ export function register(data: RegisterDataType) {
 
 export function login(data: LoginDataType) {
   return request<{ token: string }>({
-    url: "/user/login",
+    url: "/login",
     method: "post",
     data
   });

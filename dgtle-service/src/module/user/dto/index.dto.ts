@@ -1,5 +1,16 @@
 import { IsNotEmpty, Length } from 'class-validator';
 
+export class CreateUserDto {
+  @IsNotEmpty({ message: '用户名不能为空' })
+  username: string;
+
+  @Length(6, 20, { message: '密码长度为6-20位' })
+  @IsNotEmpty({ message: '密码不能为空' })
+  password: string;
+
+  phone: string;
+}
+
 // 更新用户信息
 export class UpdateUserDto {}
 
