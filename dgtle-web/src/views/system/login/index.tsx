@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [form, updateForm] = useState<LoginDataType>({
-    account: "16677778888",
+    phone: "16677778888",
     password: "123456"
   });
 
@@ -17,8 +17,8 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async () => {
-    const { account, password } = form;
-    const { token = "" } = await login({ account, password });
+    const { phone, password } = form;
+    const { token = "" } = await login({ phone, password });
     if (token) {
       localStorage.setItem("token", token);
       navigate("/home");
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
         <h1>账号登录</h1>
       </div>
       <div className="login-account">
-        <Input value={form.account} type="number" onChange={(account: string) => changeForm("account", account)} placeholder="输入账号" />
+        <Input value={form.phone} type="number" onChange={(phone: string) => changeForm("phone", phone)} placeholder="输入账号" />
       </div>
       <div className="login-password">
         <Input value={form.password} type="password" onChange={(password: string) => changeForm("password", password)} placeholder="输入密码" />
