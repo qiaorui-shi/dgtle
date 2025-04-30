@@ -1,3 +1,11 @@
+# 阿里oss配置
+alioss:
+  accessKeyId: ''
+  accessKeySecret: ''
+  region: ''
+  bucket: ''
+  roleArn: ''
+
 # 数据库配置
 db:
   mysql:

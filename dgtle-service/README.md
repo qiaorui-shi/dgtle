@@ -90,7 +90,21 @@
   2. 使用方式
      - 通过app.useGlobalGuards(new xxxGuard())方法注入,因为是手动new的，一般guard中依赖其它服务，nest不知道怎么给它注入依赖（不推荐）
      - 在app.module.ts中通过providers注入（推荐）
-     - 
+
+## 通过STS SDK获取临时访问凭证授权实现oss bucket上传下载（适用于客户端获取token通过ali-oss sdk上传文件）
+  https://help.aliyun.com/zh/oss/use-cases/uploading-objects-to-oss-directly-from-clients/?spm=a2c4g.11186623.help-menu-31815.d_6_1.5c986075uAxNPR
+  1. 通过创建一个用户，给他调用STS服务的AssumeRole接口的权限，这里会生成一个AccessKeyId和AccessKeySecret
+  2. 再创建一个角色，给这个角色读取对应bucket的权限
+  3. 通过用户的AccessKeyId和AccessKeySecret调用STS服务获取临时凭证
+
+  疑问：
+  - Q:已经有用户了，为什么还要创建角色给对应桶的权限，而不是直接给用户权限？
+    A:用户的AccessKeyId和AccessKeySecret是永久的，如果给了其权限，就能一直操作bucket了，不安全，而给角色权限，让用户来临时扮演这个角色获取凭证，会更安全。
+
+  安全授权其它方案：
+  1. 服务端生成PostObject所需的签名和Post Policy（对于需要限制上传文件属性的场景，注：不支持分片上传大文件和基于分片断点续传的场景）
+  2. 服务端生成PutObject所需的签名URL（对于简单上传文件的场景）
+
 ## nsetjs使用过程中的疑问
 1. 什么情况下需要使用controller、service、module?
    - 需要提供http等接口时候，也就是业务模块，需要用到controller、service、module。
