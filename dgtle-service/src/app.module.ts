@@ -5,6 +5,7 @@ import { DatabaseModule } from './db/mysql/db.module';
 import { RedisModule } from './db/redis/redis.module';
 import { JwtAuthGuard } from './common/guards/jwt.guard';
 
+import { UploadModule } from './module/upload/upload.module';
 import { MainModule } from './module/main/main.module';
 import { UserModule } from './module/user/user.module';
 import { DynamicModule } from './module/dynamic/dynamic.module';
@@ -20,6 +21,7 @@ import { DynamicModule } from './module/dynamic/dynamic.module';
     RedisModule,
 
     // system
+    UploadModule,
     MainModule,
     UserModule,
     DynamicModule,

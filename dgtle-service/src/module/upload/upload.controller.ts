@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { UploadService } from './upload.service';
 
-@Controller('upload')
+@Controller()
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
@@ -11,6 +11,6 @@ export class UploadController {
    * */
   @Get('/ossSign')
   async getOssSign() {
-    const uploadToken = await this.uploadService.getOssSign();
+    await this.uploadService.getOssSign();
   }
 }
