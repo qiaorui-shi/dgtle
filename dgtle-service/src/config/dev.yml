@@ -2,7 +2,8 @@
 alioss:
   accessKeyId: ''
   accessKeySecret: ''
-  region: ''
+  regionId: ''
+  endpoint: ''
   bucket: ''
   roleArn: ''
 
@@ -47,4 +48,5 @@ perm:
         { path: '/api/captcha', method: 'GET' },
         { path: '/api/login', method: 'POST' },
         { path: '/api/registry', method: 'POST' },
+        { path: '/api/ossSign', method: 'GET' },
       ]

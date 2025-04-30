@@ -14,6 +14,7 @@ export class UploadService {
       accessKeyId: this.config.get('alioss.accessKeyId'),
       accessKeySecret: this.config.get('alioss.accessKeySecret'),
       roleArn: this.config.get('alioss.roleArn'),
+      regionId: this.config.get('alioss.regionId'),
     };
   }
 
@@ -23,13 +24,14 @@ export class UploadService {
   async getOssSign() {
     // 初始化Credentials Client
     const credentialsConfig = new Credential.Config({
-      type: 'sts',
+      type: 'access_key',
       accessKeyId: this.ossConfig.accessKeyId,
       accessKeySecret: this.ossConfig.accessKeySecret,
     });
     const credential = new Credential.default(credentialsConfig);
     const clientConfig = new OpenApi.Config({
       credential: credential,
+      regionId: this.ossConfig.regionId,
     });
     // 创建STS客户端实例
     const client = new Sts20150401.default(clientConfig);
@@ -38,6 +40,7 @@ export class UploadService {
       roleArn: this.ossConfig.roleArn,
       roleSessionName: 'upload-session',
       durationSeconds: 3600,
+      endpoint: this.config.get('alioss.endpoint'),
     });
 
     try {
