@@ -11,6 +11,6 @@ export class UploadController {
    * */
   @Get('/ossSign')
   async getOssSign() {
-    await this.uploadService.getOssSign();
+    return await this.uploadService.getOssSign();
   }
 }

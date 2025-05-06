@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ResultData } from 'src/common/utils/result';
 import { STS } from 'ali-oss';
 
 @Injectable()
@@ -22,13 +23,16 @@ export class UploadService {
       accessKeyId: this.ossConfig.accessKeyId,
       accessKeySecret: this.ossConfig.accessKeySecret,
     });
-    const result = await sts.assumeRole(this.ossConfig.roleArn, '', '3600', 'GetStsTokenSession');
-    console.log("🚀 ~ UploadService ~ getOssSign ~ result:", result)
-
     try {
-    } catch (err) {
-      console.error('获取临时凭证失败:', err.message);
-      throw err;
+      const result = await sts.assumeRole(this.ossConfig.roleArn, '', '3600', 'GetStsTokenSession');
+      console.log("🚀 ~ UploadService ~ getOssSign ~ result:", result)
+      return ResultData.success(200, '成功', {
+        accessKeyId: result.credentials.AccessKeyId,
+        accessKeySecret: result.credentials.AccessKeySecret,
+        securityToken: result.credentials.SecurityToken,
+      });
+    } catch (error) {
+      return ResultData.fail(500, '获取凭证失败');
     }
   }
 }
