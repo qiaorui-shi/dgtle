@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { UploadService } from './upload.service';
 
-@Controller()
+@Controller('upload')
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
