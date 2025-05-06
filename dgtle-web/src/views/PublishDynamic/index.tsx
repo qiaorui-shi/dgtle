@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { CloseOutline } from "antd-mobile-icons";
 import { TextArea } from "antd-mobile";
-import { loadImg } from "@/utils";
+// import { loadImg } from "@/utils";
+import ImageUpload from "@/components/img-upload";
 
 const PublishDynamic: React.FC = () => {
   const [imgList, setImgList] = useState<string[]>([
@@ -16,7 +17,6 @@ const PublishDynamic: React.FC = () => {
     "/assets/img1/3.png",
     "/assets/img1/4.png"
   ]);
-  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const Header: React.FC = () => {
     return (
@@ -38,16 +38,7 @@ const PublishDynamic: React.FC = () => {
           <TextArea placeholder="请输入你的想法..." rows={5} maxLength={200} showCount />
         </div>
         <div className="content-img">
-          {imgList && imgList.length === 0 && <div className="add"></div>}
-          <div className="show-box" ref={containerRef}>
-            {imgList.map((item, index) => {
-              return (
-                <div className="img-item" key={index}>
-                  <img src={loadImg(item)} alt="" />
-                </div>
-              );
-            })}
-          </div>
+          <ImageUpload></ImageUpload>
         </div>
       </div>
     );
