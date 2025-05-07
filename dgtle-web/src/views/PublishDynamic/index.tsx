@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./index.scss";
 import { CloseOutline } from "antd-mobile-icons";
 import { TextArea } from "antd-mobile";
 // import { loadImg } from "@/utils";
+import { ImageUploadItem } from "antd-mobile/es/components/image-uploader";
 import ImageUpload from "@/components/img-upload";
 
 const PublishDynamic: React.FC = () => {
-  const [imgList, setImgList] = useState<string[]>([
-    "/assets/img1/2.png",
-    "/assets/img1/3.png",
-    "/assets/img1/4.png",
-    "/assets/img1/2.png",
-    "/assets/img1/3.png",
-    "/assets/img1/4.png",
-    "/assets/img1/2.png",
-    "/assets/img1/3.png",
-    "/assets/img1/4.png"
-  ]);
+  const [imgList, setImgList] = useState<ImageUploadItem[]>([]);
+  const [text, setText] = useState("");
+
+  const changeImgList = (value: ImageUploadItem[]) => {
+    setImgList([...value]);
+  };
 
   const Header: React.FC = () => {
     return (
@@ -35,10 +31,10 @@ const PublishDynamic: React.FC = () => {
     return (
       <div className="content">
         <div className="content-text">
-          <TextArea placeholder="请输入你的想法..." rows={5} maxLength={200} showCount />
+          <TextArea placeholder="请输入你的想法..." value={text} onChange={(val) => setText(val)} rows={5} maxLength={200} showCount />
         </div>
         <div className="content-img">
-          <ImageUpload></ImageUpload>
+          <ImageUpload value={imgList} onChange={(value) => changeImgList(value)} maxLength={9}></ImageUpload>
         </div>
       </div>
     );

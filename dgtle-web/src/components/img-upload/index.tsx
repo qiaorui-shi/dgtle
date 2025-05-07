@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import { ImageUploader, Toast } from "antd-mobile";
 import { ImageUploadItem } from "antd-mobile/es/components/image-uploader";
-import * as uploadApi from "@/api/module/upload";
+import * as UploadApi from "@/api/module/upload";
+import * as UploadType from "./types";
 import "./index.scss";
 import OSS from "ali-oss";
 
 // 基础用法
-const UploadImg: React.FC = () => {
-  const [fileList, setFileList] = useState<ImageUploadItem[]>([]);
-  const [progressValue, setProgressValue] = useState<number>(0);
+const UploadImg: React.FC<UploadType.UploadImgProps> = ({ value, onChange, businessPath = "default", maxSize = 10 * 1024 * 1024, maxLength = 1 }) => {
+  const [fileList] = useState<ImageUploadItem[]>((value as unknown as ImageUploadItem[]) || []);
   const ossSign = useRef<{
     accessKeyId: string;
     accessKeySecret: string;
@@ -21,15 +21,13 @@ const UploadImg: React.FC = () => {
 
   // 校验文件列表
   const checkFile = (file: File): boolean => {
-    const fileSizeLimit = 10 * 1024 * 1024;
     const fileTypeList = ["image/jpeg", "image/png"];
-    const maxFiles = 1;
 
-    if (fileList.length > maxFiles) {
-      Toast.show("文件数量不能超过1个");
+    if (fileList.length >= maxLength) {
+      Toast.show(`文件数量不能超过${maxLength}个`);
       return false;
     }
-    if (file.size > fileSizeLimit) {
+    if (file.size > maxSize) {
       Toast.show("文件大小不能超过10M");
       return false;
     }
@@ -43,7 +41,7 @@ const UploadImg: React.FC = () => {
   // 获取 OSS 签名
   const getOssSign = async () => {
     try {
-      const sign = await uploadApi.getOssSign();
+      const sign = await UploadApi.getOssSign();
       ossSign.current = sign;
       return sign;
     } catch {
@@ -52,7 +50,7 @@ const UploadImg: React.FC = () => {
   };
 
   // 上传前钩子
-  const beforeUpload = async (file: File): Promise<File | null> => {
+  const beforeUpload = async (file: File) => {
     const isValid = checkFile(file);
     if (!isValid) return null;
     const sign = await getOssSign();
@@ -63,11 +61,10 @@ const UploadImg: React.FC = () => {
   const createOssPath = (file: string) => {
     const userInfo = localStorage.getItem("userInfo"); // 用户ID
     const userId = userInfo ? JSON.parse(userInfo).id : "";
-    const ossPath = "dynamic"; // 业务关联
     const time = new Date().getTime();
     const fileArr = file.split(".");
     // 设置路径  应用/用户ID/业务名/文件类型/文件名+时间戳
-    return `dgtle/${userId}/${ossPath}/images/${fileArr[0] + time}.${fileArr[1]}`;
+    return `dgtle/${userId}/${businessPath}/images/${fileArr[0] + time}.${fileArr[1]}`;
   };
 
   //   上传文件
@@ -80,33 +77,32 @@ const UploadImg: React.FC = () => {
       bucket: "dgtle"
     });
     const fileSize = file.size / 1024 / 1024;
-    const userInfo = localStorage.getItem("userInfo"); // 用户ID
-    const userId = userInfo ? JSON.parse(userInfo).id : "";
-    const ossPath = "images"; // 业务关联
-    if (fileSize < 10) {
+    const fileOssPath = createOssPath(file.name);
+    let result: OSS.MultipartUploadResult | OSS.PutObjectResult;
+    if (fileSize > 10) {
       // 分片上传
-      const res = await ossSession.multipartUpload(createOssPath(file.name), file, {
+      result = await ossSession.multipartUpload(fileOssPath, file, {
         // 获取分片上传进度、断点和返回值。
-        progress: (p: number, cpt: any) => {
-          setProgressValue(p * 100 || 1);
-        }
+        progress: (p: number, cpt: unknown) => {
+          console.log("🚀 ~ handleUpload ~ p:", p);
+          console.log("🚀 ~ handleUpload ~ cpt:", cpt);
+        },
+        // 设置并发上传的分片数量。
+        parallel: 4,
+        // 设置分片大小。默认值为1 MB，最小值为100 KB。
+        partSize: 1 * 1024 * 1024
       });
-      setFileList((fileList) => [...fileList, { url: import.meta.env.VITE_APP_STATIC_URL + res.name }]);
-      return {
-        url: import.meta.env.VITE_APP_STATIC_URL + res.name
-      };
     } else {
       // 普通上传
-      const res = ossSession.put({ key: `/web/${userId}/${ossPath}`, file: file });
-      console.log("🚀 ~ ossSession.multipartUpload ~ res:", res);
-      return {
-        url: import.meta.env.VITE_APP_STATIC_URL + res.name
-      };
+      result = await ossSession.put(fileOssPath, file);
     }
+    const url = import.meta.env.VITE_APP_STATIC_URL + result.name;
+    return { url };
   };
+
   return (
     <div>
-      <ImageUploader columns={3} value={fileList} onChange={setFileList} beforeUpload={beforeUpload} upload={handleUpload} />
+      <ImageUploader value={fileList} columns={3} maxCount={maxLength} multiple onChange={onChange} beforeUpload={beforeUpload} upload={handleUpload} />
     </div>
   );
 };
