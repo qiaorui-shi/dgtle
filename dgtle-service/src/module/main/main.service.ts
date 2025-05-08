@@ -31,7 +31,12 @@ export class MainService {
    * */
   verifyToken(token: string) {
     if (!token) return null;
-    return this.jwtService.verify(token.replace('Bearer ', ''));
+    try {
+      const payload = this.jwtService.verify(token.replace('Bearer ', ''));
+      return payload;
+    } catch (error) {
+      return null;
+    }
   }
 
   /**

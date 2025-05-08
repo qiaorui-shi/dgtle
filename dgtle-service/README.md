@@ -114,4 +114,9 @@
   总结：一个模块如果涉及接口则使用controller；service是否需要根据是否有需要封装的逻辑来决定。
 
 ## 其它
-  1. path-to-regexp库，将地址转换为正则表达式，示例：路由白名单转换成正则再对当前请求的路由进行正则校验
+  1. `path-to-regexp`库，将地址转换为正则表达式，示例：路由白名单转换成正则再对当前请求的路由进行正则校验
+  2. `@nestjs/jwt` `passport-jwt` `@nestjs/passport` `passport`
+    - @nestjs/jwt是nestjs对jsonWebToken的封装，提供了jwt的生成、验证等方法
+    - passport-jwt是passport.js的jwt策略，提供Straegy类，支持从请求头提取token
+    - @nestjs/passport是nestjs对Passport.js的封装，提供了AuthGuard类，PassportStrategy抽象类，方便继承和实现策略
+    - passport是一个认证中间件，提供了多种认证策略，需要配合具体策略使用

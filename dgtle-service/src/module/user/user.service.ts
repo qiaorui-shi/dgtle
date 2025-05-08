@@ -5,8 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ResultData } from 'src/common/utils/result';
 // 引入实体
 import { UserEntity } from './entities/user.entity';
-import { CreateUserDto } from './dto/index.dto';
-import { UpdateUserDto } from './dto/index.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/index.dto';
 
 @Injectable()
 export class UserService {

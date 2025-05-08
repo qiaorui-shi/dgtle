@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('dynamic')
-export class Dynamic {
+export class DynamicEntity {
   @PrimaryGeneratedColumn({ type: 'bigint', comment: '动态ID' })
   id: number;
 

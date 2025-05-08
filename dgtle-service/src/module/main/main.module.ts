@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { MainController } from './main.controller';
 import { MainService } from './main.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
 
+@Global()
 @Module({
   imports: [
     UserModule,
@@ -19,5 +20,6 @@ import { UserModule } from '../user/user.module';
   ],
   controllers: [MainController],
   providers: [MainService],
+  exports: [MainService],
 })
 export class MainModule {}

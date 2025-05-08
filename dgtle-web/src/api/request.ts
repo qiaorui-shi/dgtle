@@ -3,7 +3,7 @@ import { Toast } from "antd-mobile";
 
 // 创建axios实例
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_APP_ENV === 'dev' ? "/api" : import.meta.env.VITE_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_APP_ENV === "dev" ? "/api" : import.meta.env.VITE_APP_BASE_URL,
   timeout: 10000, // 请求超时时间
   headers: {
     "Content-Type": "application/json"
@@ -16,7 +16,7 @@ instance.interceptors.request.use(
     // 1.添加token
     const token = localStorage.getItem("token");
     if (token) {
-      config.headers.Authorization = token;
+      config.headers.Authorization = "Bearer " + token;
     }
     return config;
   },
