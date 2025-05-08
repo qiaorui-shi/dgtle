@@ -7,8 +7,8 @@ import "./index.scss";
 import OSS from "ali-oss";
 
 // 基础用法
-const UploadImg: React.FC<UploadType.UploadImgProps> = ({ value, onChange, businessPath = "default", maxSize = 10 * 1024 * 1024, maxLength = 1 }) => {
-  const [fileList] = useState<ImageUploadItem[]>((value as unknown as ImageUploadItem[]) || []);
+const UploadImg: React.FC<UploadType.UploadImgProps> = ({ value, onChange, businessPath = "default", maxSize = 10, maxLength = 1 }) => {
+  const [fileList] = useState<ImageUploadItem[]>(value || []);
   const ossSign = useRef<{
     accessKeyId: string;
     accessKeySecret: string;
@@ -27,8 +27,8 @@ const UploadImg: React.FC<UploadType.UploadImgProps> = ({ value, onChange, busin
       Toast.show(`文件数量不能超过${maxLength}个`);
       return false;
     }
-    if (file.size > maxSize) {
-      Toast.show("文件大小不能超过10M");
+    if (file.size > maxSize * 1024 * 1024) {
+      Toast.show(`文件大小不能超过${maxSize}M`);
       return false;
     }
     if (!fileTypeList.includes(file.type)) {

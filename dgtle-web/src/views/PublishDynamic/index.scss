@@ -17,8 +17,13 @@
       .publish-btn {
         padding: 2px 12px;
         border-radius: 16px;
-        background-color: #e2e2e2;
+        background-color: #2d3f56;
+        color: #fff;
         font-size: 14px;
+      }
+      .is-disabled {
+        background-color: #e2e2e2;
+        color: #000;
       }
     }
   }
