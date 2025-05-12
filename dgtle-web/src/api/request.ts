@@ -43,8 +43,9 @@ instance.interceptors.response.use(
         Toast.show(res.data.message || "服务器错误");
       }
       return Promise.reject(res.data);
+    } else {
+      return Promise.resolve(res.data);
     }
-    return Promise.resolve(res.data);
   },
   (error) => {
     return Promise.reject(error);

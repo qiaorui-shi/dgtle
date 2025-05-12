@@ -10,9 +10,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const validatorMessage = exception.message;
 
-    response.status(status).json({
-      statusCode: status,
+    // 都处理为200，前端根据statusCode判断，不写200，axios在响应拦截器中会走error
+    response.status(200).json({
+      code: status,
       message: validatorMessage,
+      data: null,
     });
   }
 }
