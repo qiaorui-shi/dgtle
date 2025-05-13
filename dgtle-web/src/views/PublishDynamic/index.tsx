@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.scss";
 import { CloseOutline } from "antd-mobile-icons";
-import { TextArea } from "antd-mobile";
+import { TextArea, Toast } from "antd-mobile";
 import { ImageUploadItem } from "antd-mobile/es/components/image-uploader";
 import ImageUpload from "@/components/img-upload";
+import * as DynamicApi from "@/api/module/dynamic/index";
 
 const PublishDynamic: React.FC = () => {
   const navgate = useNavigate();
@@ -15,9 +16,11 @@ const PublishDynamic: React.FC = () => {
     setDisabled(!text && imgList?.length <= 0);
   }, [text, imgList]);
 
-  const publish = () => {
+  const publish = async () => {
     if (disabled) return;
-    console.log("发布动态", text, imgList);
+    const imgListParam = imgList.map((item) => item.url);
+    await DynamicApi.publishDynamic({ dynamic_text: text, dynamic_images: imgListParam });
+    Toast.show("发布成功");
   };
 
   const back = () => {

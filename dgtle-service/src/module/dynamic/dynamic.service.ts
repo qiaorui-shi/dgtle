@@ -3,7 +3,8 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 // 引入实体
 import { DynamicEntity } from './entities/dynamic.entity';
-import { CreateDynamicDto } from './dto/index';
+import { CreateDynamicDto } from './dto/index.dto';
+import { ResultData } from 'src/common/utils/result';
 
 @Injectable()
 export class DynamicService {
@@ -12,8 +13,14 @@ export class DynamicService {
     private readonly dynamicRepo: Repository<DynamicEntity>,
   ) {}
 
-  create(createDynamicDto: CreateDynamicDto) {
-    console.log("🚀 ~ DynamicService ~ create ~ createDynamicDto:", createDynamicDto)
+  create(createDynamicDto: CreateDynamicDto, req) {
+    const { dynamic_text, dynamic_images } = createDynamicDto;
+    if (!dynamic_text && dynamic_images?.length === 0) {
+      return ResultData.fail(500, '发布内容不能为空');
+    }
+    console.log("🚀 ~ DynamicService ~ create ~ req:", req)
+    // createDynamicDto.dynamicPublishTime = new Date();
+    // this.dynamicRepo.save(createDynamicDto);
   }
 
   findAll() {

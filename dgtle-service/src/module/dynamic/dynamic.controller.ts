@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { DynamicService } from './dynamic.service';
-import { CreateDynamicDto } from './dto/index';
+import { CreateDynamicDto } from './dto/index.dto';
 
 @Controller('dynamic')
 export class DynamicController {
   constructor(private readonly dynamicService: DynamicService) {}
 
-  @Post()
-  create(@Body() createDynamicDto: CreateDynamicDto) {
-    return this.dynamicService.create(createDynamicDto);
+  @Post('/publish')
+  create(@Body() createDynamicDto: CreateDynamicDto, @Req() req) {
+    return this.dynamicService.create(createDynamicDto, req);
   }
 
   @Get()
