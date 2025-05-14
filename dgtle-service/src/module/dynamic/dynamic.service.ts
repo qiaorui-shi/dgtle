@@ -18,7 +18,7 @@ export class DynamicService {
     if (!dynamic_text && dynamic_images?.length === 0) {
       return ResultData.fail(500, '发布内容不能为空');
     }
-    console.log("🚀 ~ DynamicService ~ create ~ req:", req)
+    // console.log("🚀 ~ DynamicService ~ create ~ req:", req)
     // createDynamicDto.dynamicPublishTime = new Date();
     // this.dynamicRepo.save(createDynamicDto);
   }

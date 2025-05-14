@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { RedisService } from 'src/db/redis/redis.service';
-import { JwtService } from '@nestjs/jwt';
+import { AuthService } from'src/module/auth/auth.service';
 import { UserService } from 'src/module/user/user.service';
 import { RegistryUserDto, LoginUserDto } from './dto/index';
 import { generateUUID } from 'src/common/utils';
@@ -13,31 +13,9 @@ import { ResultData } from 'src/common/utils/result';
 export class MainService {
   constructor(
     private readonly redisService: RedisService,
-    private readonly jwtService: JwtService,
+    private readonly authService: AuthService,
     private readonly userService: UserService,
   ) {}
-
-  /**
-   * @description: 生成token
-   * @param payload { uuid: string; userId: string }
-   * */
-  createToken(payload: { uuid: string; userId: string }) {
-    return this.jwtService.sign(payload);
-  }
-
-  /**
-   * @description: 验证token
-   * @param token string
-   * */
-  verifyToken(token: string) {
-    if (!token) return null;
-    try {
-      const payload = this.jwtService.verify(token.replace('Bearer ', ''));
-      return payload;
-    } catch (error) {
-      return null;
-    }
-  }
 
   /**
    * @description: 获取验证码
@@ -84,7 +62,7 @@ export class MainService {
       // 生成uuid
       const uuid = generateUUID();
       // 根据uuid和用户id生成token
-      const token = this.createToken({ uuid, userId: user.id });
+      const token = this.authService.createToken({ uuid, userId: user.id });
       this.redisService.set(
         `${CacheEnum.LOGIN_TOKEN_KEY}${uuid}`,
         JSON.stringify(user),
