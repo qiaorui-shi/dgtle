@@ -13,10 +13,11 @@ export class DynamicEntity {
   id: number;
 
   @Index('idx_user_id')
-  @Column({ type: 'bigint', comment: '用户ID' })
+  @Column({ name: 'user_id', type: 'bigint', comment: '用户ID' })
   userId: number;
 
   @Column({
+    name: 'dynamic_text',
     type: 'text',
     nullable: true,
     comment: '动态文本内容',
@@ -25,7 +26,7 @@ export class DynamicEntity {
   })
   dynamicText: string | null;
 
-  @Column({ type: 'json', nullable: true, comment: '图片地址列表' })
+  @Column({ name: 'dynamic_images', type: 'json', nullable: true, comment: '图片地址列表' })
   dynamicImages: any;
 
   @CreateDateColumn({ name: 'dynamic_publish_time', type: 'datetime', comment: '发布时间' })
