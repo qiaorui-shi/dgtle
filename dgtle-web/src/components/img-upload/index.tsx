@@ -59,7 +59,7 @@ const UploadImg: React.FC<UploadType.UploadImgProps> = ({ value, onChange, busin
   };
 
   const createOssPath = (file: string) => {
-    const userInfo = localStorage.getItem("userInfo"); // 用户ID
+    const userInfo = sessionStorage.getItem("userInfo"); // 用户ID
     const userId = userInfo ? JSON.parse(userInfo).id : "";
     const time = new Date().getTime();
     const fileArr = file.split(".");

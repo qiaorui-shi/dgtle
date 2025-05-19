@@ -15,7 +15,7 @@ const PublishDynamic = lazy(() => import("../views/PublishDynamic/index"));
 
 const checkAuth = () => {
   // 校验token是否存在
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (!token) {
     return redirect("/login");
   }

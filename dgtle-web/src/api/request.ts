@@ -14,7 +14,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     // 1.添加token
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (token) {
       config.headers.Authorization = "Bearer " + token;
     }
@@ -36,7 +36,7 @@ instance.interceptors.response.use(
       // 2.token失效
       if (res.data.code === 401) {
         Toast.show("登录已过期，请重新登录");
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
         window.location.href = "/login";
       } else {
         // 3.其他错误

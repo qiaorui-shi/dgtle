@@ -25,7 +25,6 @@ export class UploadService {
     });
     try {
       const result = await sts.assumeRole(this.ossConfig.roleArn, '', '3600', 'GetStsTokenSession');
-      console.log("🚀 ~ UploadService ~ getOssSign ~ result:", result)
       return ResultData.success(200, '成功', {
         accessKeyId: result.credentials.AccessKeyId,
         accessKeySecret: result.credentials.AccessKeySecret,

@@ -23,6 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const { uuid, userId } = payload;
     const user = await this.redisService.get(`${CacheEnum.LOGIN_TOKEN_KEY}${uuid}`); // 从redis中获取用户信息
     if (!user) throw new UnauthorizedException('当前登录已过期, 请重新登录');
-    return payload;
+    // 这里renturn后默认会将payload赋值给req.user 属于passport的默认标准行为
+    return payload
   }
 }

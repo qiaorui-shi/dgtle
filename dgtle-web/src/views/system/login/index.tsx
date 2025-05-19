@@ -20,8 +20,8 @@ const Login: React.FC = () => {
     const { phone, password } = form;
     const { token = "", userInfo = {} } = await login({ phone, password });
     if (token) {
-      localStorage.setItem("token", token);
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
       navigate("/home");
     }
   };
