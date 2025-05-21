@@ -9,7 +9,7 @@ import {
 
 @Entity('dynamic')
 export class DynamicEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint', comment: '动态ID' })
+  @PrimaryGeneratedColumn({ name: 'id', type: 'bigint', comment: '动态ID' })
   id: number;
 
   @Index('idx_user_id')
