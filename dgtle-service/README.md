@@ -36,6 +36,8 @@
           ...config.get('db.mysql'), // 从配置文件中获取数据库连接信息
         } as TypeOrmModuleOptions;
     })
+
+    typeOrm的在nest中使用解析：
     ```
   - 因为nestjs打包只会将ts文件打包到dist下，所以yml文件需要在nest-cli.json中配置
   ```javascript

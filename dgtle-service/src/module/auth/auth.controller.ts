@@ -1,17 +1,19 @@
-import { Controller, Body, Get, Post } from '@nestjs/common';
+import { Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { Body, Post } from '@nestjs/common';
 import { RegistryUserDto, LoginUserDto } from './dto/index';
-import { MainService } from './main.service';
-@Controller()
-export class MainController {
-  constructor(private mainService: MainService) {}
 
+@Controller('auth')
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
   /**
    * @description 获取验证码
    * @returns {Promise<ResultData>} 返回验证码图片
    * */
   @Get('/captcha')
   getCaptchaImage() {
-    return this.mainService.getCaptchaImage();
+    return this.authService.getCaptchaImage();
   }
 
   /**
@@ -20,7 +22,7 @@ export class MainController {
    * */
   @Post('/registry')
   registry(@Body() registryUserDto: RegistryUserDto) {
-    return this.mainService.registry(registryUserDto);
+    return this.authService.registry(registryUserDto);
   }
 
   /**
@@ -29,6 +31,14 @@ export class MainController {
    * */
   @Post('/login')
   login(@Body() loginUserDto: LoginUserDto) {
-    return this.mainService.login(loginUserDto);
+    return this.authService.login(loginUserDto);
+  }
+
+  /**
+   * github
+   * */
+  @Get('/github/login')
+  githubLogin() {
+    return ''
   }
 }

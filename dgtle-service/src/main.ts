@@ -5,7 +5,7 @@ import { join } from 'path';
 // import { ValidationPipe } from '@nestjs/common';
 import { ValidationPipe } from './common/pipes/validate.pipe';
 import { HttpExceptionFilter } from './common/filters/http-exception-filter';
-// import { JwtAuthGuard } from './common/guards/jwt.guard.ts';
+// import { AuthAuthGuard } from './common/guards/jwt.guard.ts';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -21,7 +21,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   // 设置守卫 自己手动new注册，不是由nest管理，如果Guard中依赖其它服务就会出问题，因为nest不知道怎么给它注入依赖
   // 适用于简单守卫
-  // app.useGlobalGuards(new JwtAuthGuard());
+  // app.useGlobalGuards(new AuthAuthGuard());
 
   await app.listen(process.env.PORT ?? 3000);
 }
