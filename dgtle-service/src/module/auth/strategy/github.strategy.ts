@@ -18,9 +18,6 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
   // refreshToken 刷新令牌，用于刷新访问令牌
   // profile 用户信息
   async validate(accessToken: string, refreshToken: string, profile: any): Promise<unknown> {
-    // 1.判断是创建用户还是直接取对应用户
-
-    // 2.创建/登录完成后，将用户信息返回给客户端以及token，还有redirectUrl
     return {
       githubId: profile.id,
       username: profile.username,

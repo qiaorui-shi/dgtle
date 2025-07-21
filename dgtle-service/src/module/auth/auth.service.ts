@@ -36,14 +36,14 @@ export class AuthService {
    * */
   async registry(registryUserDto: RegistryUserDto) {
     // 这里只处理验证码逻辑,创建用户逻辑丢给userService处理
-    const { code, uuid } = registryUserDto;
+    const { username, password, phone, code, uuid } = registryUserDto;
     const captchaCode = await this.redisService.get(`${CacheEnum.CAPTCHA_CODE_KEY}${uuid}`);
     if (!captchaCode) return ResultData.fail(500, '验证码已过期');
     if (captchaCode === code) return ResultData.fail(500, '验证码错误');
     // 验证码正确,删除验证码
     this.redisService.del(`${CacheEnum.CAPTCHA_CODE_KEY}${uuid}`);
     // 注册用户
-    const res = await this.userService.createUser(registryUserDto);
+    const res = await this.userService.createUser({ username, password, phone });
     if (res.code === 200) {
       return ResultData.success(200, '注册成功');
     } else {
@@ -86,8 +86,24 @@ export class AuthService {
    * @description github登录
    *
    * */
-  githubLogin(user: any) {
-    
+  async githubLogin(user: any) {
+    const userInfo = this.userService.findUserByGithubId(user.githubId);
+    if (userInfo) {
+      // 存在用户直接返回
+      return ResultData.success(200, '登录成功', { ...userInfo });
+    } else {
+      // 自动注册后返回用户信息
+      const res = await this.userService.createUser({
+        githubId: user.githubId,
+        username: user.username,
+        email: user.email,
+      });
+      if (res.code === 200) {
+        return ResultData.success(200, '登录成功', { ...res });
+      } else {
+        return ResultData.fail(500, res.message);
+      }
+    }
   }
 
   /**

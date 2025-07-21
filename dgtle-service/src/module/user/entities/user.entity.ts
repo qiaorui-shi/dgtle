@@ -5,6 +5,9 @@ export class UserEntity {
   @PrimaryGeneratedColumn('increment', { type: 'bigint', comment: '用户ID' })
   id: string; // bigint 用 string 表示，避免精度丢失
 
+  @Column({ type: 'varchar', length: 20, nullable: true, comment: 'githubID' })
+  githubId: string;
+
   @Column({ type: 'varchar', length: 20, comment: '用户昵称' })
   username: string;
 
@@ -24,4 +27,7 @@ export class UserEntity {
 
   @Column({ type: 'int', comment: '用户账号等级经验' })
   level_exp: number;
+
+  @Column({ type: 'timestamp', comment: '用户注册时间' })
+  createdAt: Date;
 }

@@ -45,6 +45,7 @@ export class AuthController {
 
   /**
    * @descrtion github授权后携带code参数重定向该接口
+   * @params {}
    * */
   @UseGuards(GithubAuthGuard)
   @Get('/github/callback')

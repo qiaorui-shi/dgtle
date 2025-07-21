@@ -49,6 +49,14 @@ export class UserService {
     return user || null;
   }
 
+  /**
+   * @description: 根据githubID查询用户信息
+   * */ 
+  async findUserByGithubId(githubId: string) {
+    const user = await this.userRepo.findOne({ where: { githubId } });
+    return user || null;
+  }
+
   async findOne(id: number) {
     return `This action returns a #${id} user`;
   }

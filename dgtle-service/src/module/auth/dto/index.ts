@@ -1,6 +1,8 @@
 import { IsNotEmpty, Length } from 'class-validator';
 // 注册用户
 export class RegistryUserDto {
+  githubId?: string;
+  email?: string;
   @IsNotEmpty({ message: '用户名不能为空' })
   username: string;
   @IsNotEmpty({ message: '账号不能为空' })
