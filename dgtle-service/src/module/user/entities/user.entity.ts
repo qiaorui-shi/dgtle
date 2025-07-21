@@ -6,10 +6,13 @@ export class UserEntity {
   id: string; // bigint 用 string 表示，避免精度丢失
 
   @Column({ type: 'varchar', length: 20, nullable: true, comment: 'githubID' })
-  githubId: string;
+  githubId?: string;
 
   @Column({ type: 'varchar', length: 20, comment: '用户昵称' })
   username: string;
+
+  @Column({ type: 'varchar', comment: '用户邮箱' })
+  email?: string;
 
   @Column({
     type: 'varchar',
@@ -20,14 +23,11 @@ export class UserEntity {
   phone?: string;
 
   @Column({ type: 'varchar', length: 128, comment: '用户密码' })
-  password: string;
+  password?: string;
 
   @Column({ type: 'tinyint', comment: '用户账号等级' })
   level: number;
 
   @Column({ type: 'int', comment: '用户账号等级经验' })
   level_exp: number;
-
-  @Column({ type: 'timestamp', comment: '用户注册时间' })
-  createdAt: Date;
 }
