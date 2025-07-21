@@ -9,8 +9,9 @@ import { ResultData } from 'src/common/utils/result';
 @Injectable()
 export class DynamicService {
   constructor(
+    // @injectRepository（）用于桥接TypeOrm和NestJS的DI系统
     @InjectRepository(DynamicEntity)
-    private readonly dynamicRepo: Repository<DynamicEntity>,
+    private readonly dynamicRepo: Repository<DynamicEntity>, //通过型 Repository<T>确保实体类正确
   ) {}
 
   async create(createDynamicDto: CreateDynamicDto, req) {

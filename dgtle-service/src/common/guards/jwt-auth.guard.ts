@@ -38,7 +38,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   async activate(ctx: ExecutionContext): Promise<boolean> {
     return super.canActivate(ctx) as Promise<boolean>;
   }
-  
+
   /**
    * @description: 检查接口是否在白名单中
    * @param ctx ExecutionContext
@@ -49,7 +49,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const i = this.whiteList.findIndex((route) => {
       // 如果请求的方法和路径都匹配，就返回true
       if (route.method && route.method.toUpperCase() === request.method.toUpperCase()) {
-        return !!pathToRegexp(route.path).regexp.exec(request.url);
+        return !!pathToRegexp(route.path).regexp.exec(request.url.split('?')[0]);
       }
       // 反之false
       return false;

@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import dbconfig from './config/index';
-import { DatabaseModule } from './db/mysql/db.module';
-import { RedisModule } from './db/redis/redis.module';
-import { JwtAuthGuard } from './common/guards/auth.guard';
+import dbconfig from '@/config/index';
+import { DatabaseModule } from '@/db/mysql/db.module';
+import { RedisModule } from '@/db/redis/redis.module';
+import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
 
-import { AuthModule } from './module/auth/auth.module';
-import { UploadModule } from './module/upload/upload.module';
-import { MainModule } from './module/main/main.module';
-import { UserModule } from './module/user/user.module';
-import { DynamicModule } from './module/dynamic/dynamic.module';
+import { AuthModule } from '@/module/auth/auth.module';
+import { UploadModule } from '@/module/upload/upload.module';
+import { UserModule } from '@/module/user/user.module';
+import { DynamicModule } from '@/module/dynamic/dynamic.module';
 
 @Module({
   imports: [
@@ -24,7 +23,6 @@ import { DynamicModule } from './module/dynamic/dynamic.module';
     // system
     AuthModule,
     UploadModule,
-    MainModule,
     UserModule,
     DynamicModule,
   ],
