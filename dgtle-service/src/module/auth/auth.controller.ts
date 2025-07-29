@@ -1,6 +1,8 @@
-import { Get, UseGuards, Request } from '@nestjs/common';
+import { Get, UseGuards, Request, Response, Inject } from '@nestjs/common';
 import { GithubAuthGuard } from '@/common/guards/github-auth.guard';
 
+import { ResultData } from 'src/common/utils/result';
+import { ConfigService } from '@nestjs/config';
 import { Controller } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Body, Post } from '@nestjs/common';
@@ -8,7 +10,10 @@ import { RegistryUserDto, LoginUserDto } from './dto/index';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    @Inject(ConfigService) private readonly config: ConfigService,
+  ) {}
   /**
    * @description 获取验证码
    * @returns {Promise<ResultData>} 返回验证码图片

@@ -26,6 +26,9 @@ const Login: React.FC = () => {
     }
   };
 
+  const changeLogin = () => {
+    navigate("/loginMode");
+  };
   return (
     <div className="page-login">
       <div className="title">
@@ -46,7 +49,9 @@ const Login: React.FC = () => {
         >
           登录
         </button>
-        <div className="other">选择其它登录方式</div>
+        <div className="other" onClick={changeLogin}>
+          选择其它登录方式
+        </div>
       </div>
     </div>
   );
