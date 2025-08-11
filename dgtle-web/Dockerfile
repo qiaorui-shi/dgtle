@@ -1,17 +1,11 @@
-# 使用官方nginx镜像作为基础
-FROM nginx:alpine
-
+# 构建阶段
+FROM node:22-alpine AS builder
 # 创建工作目录
-RUN mkdir -p /usr/share/nginx/html
-
-# 复制dist文件到nginx默认目录
-COPY ./dist /usr/share/nginx/html/
-
-# 复制nginx配置文件
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
-# 暴露80端口
-EXPOSE 80
-
-# 启动nginx
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /usr/src/app
+# 复制package.json和package-lock.json
+COPY package*.json ./
+# 安装依赖
+RUN npm install
+# 复制项目文件
+COPY . .
+RUN npm run build
